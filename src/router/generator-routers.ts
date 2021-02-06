@@ -61,7 +61,8 @@ export const generatorDynamicRouter = () => {
             // listToTree(data, childrenNav, 0)
             // rootRouter.children = childrenNav
             menuNav.push(childrenNav)
-            const routeList = list2tree(result)
+            // TODO 这里是根据后端返回的数据来的路由
+            const routeList = list2tree([])
             console.log(routeList, '根据后端返回的权限路由生成')
             routeList.forEach(item => {
                 // 设置模块重定向到菜单

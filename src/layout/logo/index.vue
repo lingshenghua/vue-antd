@@ -35,5 +35,15 @@ export default {
     color: white;
     margin-bottom: 0;
   }
+
+  h3 {
+    display: inline-block;
+    color: #fff;
+    font-weight: 600;
+    font-size: 20px;
+    vertical-align: middle;
+    animation: fade-in;
+    animation-duration: .3s;
+}
 }
 </style>

@@ -7,7 +7,7 @@
       :inline-collapsed="collapsed"
       @click="clickMenuItem"
   >
-    <template v-for="item in menus" :key="item.name">
+    <template v-for="item in menus" :key="item.name" >
       <menu-item :menu-info="item"/>
     </template>
   </a-menu>
