@@ -1,2 +1,7 @@
 $header-height: 64px;
 $footer-height: 70px;
+
+.ant-menu-dark .ant-menu-inline.ant-menu-sub {
+    background: none !important;
+    box-shadow: none !important;
+}
