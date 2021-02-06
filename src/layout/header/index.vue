@@ -1,9 +1,14 @@
 <template>
   <ALayoutHeader class="layout-header">
     <div class="left-options">
-      <span @click="() => $emit('update:collapsed', !collapsed)" class="menu-fold">
-        <component :is="collapsed ? 'menu-unfold-outlined' : 'menu-fold-outlined'" />
-    </span>
+      <span
+        @click="() => $emit('update:collapsed', !collapsed)"
+        class="menu-fold"
+      >
+        <component
+          :is="collapsed ? 'menu-unfold-outlined' : 'menu-fold-outlined'"
+        />
+      </span>
       <a-breadcrumb>
         <template v-for="routeItem in route.matched" :key="routeItem.name">
           <a-breadcrumb-item>
@@ -11,8 +16,11 @@
             <template v-slot:overlay>
               <a-menu v-if="routeItem.children.length">
                 <template v-for="childItem in routeItem.children">
-                  <a-menu-item v-if="!childItem.meta.hidden" :key="childItem.name">
-                    <router-link :to="{name: childItem.name}">
+                  <a-menu-item
+                    v-if="!childItem.meta.hidden"
+                    :key="childItem.name"
+                  >
+                    <router-link :to="{ name: childItem.name }">
                       {{ childItem.meta.title }}
                     </router-link>
                   </a-menu-item>
@@ -32,16 +40,16 @@
           <component v-on="item.eventObject || {}" :is="item.icon" />
         </a-tooltip>
       </template>
-<!--      切换全屏-->
+      <!--      切换全屏-->
       <component :is="fullscreenIcon" @click="toggleFullScreen" />
       <Dropdown>
         <a-avatar>{{ username }}</a-avatar>
         <template v-slot:overlay>
           <a-menu>
-            <a-menu-item>
+            <!-- <a-menu-item>
               <a href="javascript:;">个人中心</a>
-            </a-menu-item>
-            <a-menu-divider/>
+            </a-menu-item> -->
+            <!-- <a-menu-divider /> -->
             <a-menu-item>
               <a @click.prevent="doLogout"><poweroff-outlined /> 退出登录</a>
             </a-menu-item>
@@ -53,20 +61,20 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, reactive, toRefs, createVNode} from 'vue'
-import {useRouter, useRoute} from 'vue-router'
-import components from "@/layout/header/components";
-import {message, Modal} from 'ant-design-vue'
-import {QuestionCircleOutlined} from '@ant-design/icons-vue'
-import {useStore} from 'vuex'
-import {TABS_ROUTES} from "@/store/mutation-types";
+import { defineComponent, reactive, toRefs, createVNode } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import components from '@/layout/header/components'
+import { message, Modal } from 'ant-design-vue'
+import { QuestionCircleOutlined } from '@ant-design/icons-vue'
+import { useStore } from 'vuex'
+import { TABS_ROUTES } from '@/store/mutation-types'
 
 export default defineComponent({
-  name: "PageHeader",
-  components: {...components},
+  name: 'PageHeader',
+  components: { ...components },
   props: {
     collapsed: {
-      type: Boolean,
+      type: Boolean
     }
   },
   setup() {
@@ -94,58 +102,64 @@ export default defineComponent({
             message.success('成功退出登录')
             // 移除标签页
             localStorage.removeItem(TABS_ROUTES)
-            router.replace({
-              name: 'login',
-              query: {
-                redirect: route.fullPath
-              }
-            }).finally(() => location.reload())
+            router
+              .replace({
+                name: 'login',
+                query: {
+                  redirect: route.fullPath
+                }
+              })
+              .finally(() => location.reload())
           })
         }
       })
     }
 
     // 切换全屏图标
-    const toggleFullscreenIcon = () => (state.fullscreenIcon = document.fullscreenElement !== null ? 'FullscreenExitOutlined' : 'FullscreenOutlined')
+    const toggleFullscreenIcon = () =>
+      (state.fullscreenIcon =
+        document.fullscreenElement !== null
+          ? 'FullscreenExitOutlined'
+          : 'FullscreenOutlined')
 
     // 监听全屏切换事件
-    document.addEventListener("fullscreenchange", toggleFullscreenIcon)
+    document.addEventListener('fullscreenchange', toggleFullscreenIcon)
 
     // 全屏切换
     const toggleFullScreen = () => {
       if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
+        document.documentElement.requestFullscreen()
       } else {
         if (document.exitFullscreen) {
-          document.exitFullscreen();
+          document.exitFullscreen()
         }
       }
     }
 
     // 图标列表
     const iconList = [
-      {
-        icon: 'SearchOutlined',
-        tips: '搜索'
-      },
-      {
-        icon: 'GithubOutlined',
-        tips: 'github',
-        eventObject: {
-          click: () => window.open('https://github.com/buqiyuan/vue3-antd')
-        }
-      },
-      {
-        icon:  'SettingOutlined',
-        tips: '网站设置'
-      },
+      // {
+      //   icon: 'SearchOutlined',
+      //   tips: '搜索'
+      // },
+      // {
+      //   icon: 'GithubOutlined',
+      //   tips: 'github',
+      //   eventObject: {
+      //     click: () => window.open('https://github.com/buqiyuan/vue3-antd')
+      //   }
+      // },
+      // {
+      //   icon: 'SettingOutlined',
+      //   tips: '网站设置'
+      // },
       {
         icon: 'LockOutlined',
         tips: '锁屏',
         eventObject: {
           click: () => store.commit('lockscreen/setLock', true)
         }
-      },
+      }
     ]
 
     return {

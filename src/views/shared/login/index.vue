@@ -3,7 +3,7 @@
     <div class="login-logo">
       <svg-icon icon-class="logo" />
 <!--      <img src="~@/assets/images/logo.png" alt="">-->
-      <h1>Antd Admin</h1>
+      <h1>快捷舰管理系统</h1>
     </div>
     <a-form layout="horizontal" :model="formInline" @submit="handleSubmit" @submit.prevent>
       <a-form-item>
