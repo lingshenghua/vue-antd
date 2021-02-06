@@ -2,17 +2,6 @@
   <div>
     <div class="box">
       <img src="~@/assets/analysis.svg">
-      <a-descriptions title="系统信息" bordered>
-        <a-descriptions-item label="IP" key="IP">
-          {{ userInfo.IP }}
-        </a-descriptions-item>
-        <a-descriptions-item v-for="(value, key) in browserInfo" :label="key" :key="key">
-          {{ value }}
-        </a-descriptions-item>
-        <a-descriptions-item label="网络状态">
-          <a-badge :status="online ? 'processing' : 'default'" :text="online ? '在线' : '离线'"/>
-        </a-descriptions-item>
-      </a-descriptions>
     </div>
   </div>
 </template>
