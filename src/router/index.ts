@@ -4,9 +4,10 @@ import {createRouterGuards} from './router-guards'
 import 'nprogress/nprogress.css' // 进度条样式
 
 import shared from './modules/shared'
-import {errorRoutes, notFound} from './modules/error'
+import {errorRoutes} from './modules/error'
 import common from "@/router/common";
 import {App} from "vue";
+
 
 export const routes: Array<RouteRecordRaw> = [
     {

@@ -50,7 +50,6 @@ export function createRouterGuards(router: Router) {
                 // generate dynamic router
                 // 防抖获取菜单
                 isGetMenus({to, from, next, hasRoute})
-
                 if (allowList.includes(to.name as string) || hasRoute) {
                     // 在免登录名单，直接进入
                     next()

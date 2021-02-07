@@ -1,9 +1,9 @@
-import {adminMenus} from '@/api/system/menu'
-import {constantRouterComponents} from './constantRouterComponents'
+import { adminMenus } from '@/api/system/menu'
+import { constantRouterComponents } from './constantRouterComponents'
 import router from "@/router/index";
-import {routes} from "@/router/index";
-import {notFound} from '@/router/modules/error'
-import {Empty} from 'ant-design-vue'
+import { routes } from "@/router/index";
+import { notFound } from '@/router/modules/error'
+import { Empty } from 'ant-design-vue'
 import common from "@/router/common";
 
 
@@ -13,7 +13,7 @@ import common from "@/router/common";
  */
 const list2tree = (items, parentId = -1, arr = []) => {
     return items.filter(item => item.parentId == parentId).map((item: any) => {
-        const {icon, id, name, parentId, sort, keepAlive, meta, url} = item
+        const { icon, id, name, parentId, sort, keepAlive, meta, url } = item
 
         const path = url.startsWith('/') ? url : '/' + url
 
@@ -40,7 +40,7 @@ const list2tree = (items, parentId = -1, arr = []) => {
                 // TODO 简单模拟CRUD权限：创建（Create）、更新（Update）、读取（Retrieve）和删除（Delete）操作，可以自行修改查看页面效果
                 permission: parentId == -1
                     ? []
-                    : ['create', 'update', 'retrieve', 'delete' ].map(n => `${url.split('/').filter(m => m.trim() != '').join('.')}.${n}`)
+                    : ['create', 'update', 'retrieve', 'delete'].map(n => `${url.split('/').filter(m => m.trim() != '').join('.')}.${n}`)
             }
         }
     }).sort((a, b) => a.sort - b.sort)
@@ -62,12 +62,12 @@ export const generatorDynamicRouter = () => {
             // rootRouter.children = childrenNav
             menuNav.push(childrenNav)
             // TODO 这里是根据后端返回的数据来的路由
-            const routeList = list2tree([])
+            const routeList = list2tree(result)
             console.log(routeList, '根据后端返回的权限路由生成')
             routeList.forEach(item => {
                 // 设置模块重定向到菜单
                 if (item.children?.length > 0 && !item.redirect) {
-                    item.redirect = {name: item.children[0].name}
+                    item.redirect = { name: item.children[0].name }
                 }
             })
             const layout = routes.find(item => item.name == 'Layout')!
